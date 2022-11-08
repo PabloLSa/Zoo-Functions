@@ -7,10 +7,12 @@ const objetoDias = (scheduleTarget) => {
   const { open } = hours[dia];
   const { close } = hours[dia];
 
-  const objetoInterno = {};
-  objetoInterno.officeHour = `Open from ${open}am until ${close}pm`;
-  objetoInterno.exhibition = species.filter((specie) => specie.availability
-    .some((day) => day === scheduleTarget)).map((object) => object.name);
+  const objetoInterno = {
+    officeHour: `Open from ${open}am until ${close}pm`,
+    exhibition: species
+      .filter((specie) => specie.availability
+        .some((day) => day === scheduleTarget)).map((object) => object.name),
+  };
 
   objeto[dia] = objetoInterno;
   const test = scheduleTarget === 'Monday'
@@ -29,7 +31,8 @@ const getSchedule = (scheduleTarget) => {
   const obJeto = {};
   Object.keys(hours).map((dia) => objetoDias(dia))
     .forEach((element) => {
-      obJeto[Object.keys(element)[0]] = Object.values(element)[0];
+      const zero = Object.values(element)[0];
+      obJeto[Object.keys(element)[0]] = zero;
     }); // horario e dia para cada animal dispponível
   console.log(obJeto);
   return obJeto;
